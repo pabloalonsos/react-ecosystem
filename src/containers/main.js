@@ -13,7 +13,6 @@ class Main extends Component {
         const { dispatch, visibleTodos, visibilityFilter } = this.props;
         return (
             <div>
-                Hello
                 <AddTodo onAddTodo={ text => dispatch(addTodo(text)) } />
                 <Filter
                     filter={visibilityFilter}

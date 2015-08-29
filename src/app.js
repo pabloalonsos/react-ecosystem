@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
-import Main from './containers/main-container';
+import Main from './containers/main';
 import Reducers from './reducers';
 
 const devCreateStore = compose(
