@@ -1,11 +1,17 @@
 var gulp = require('gulp');
 var webpack = require('gulp-webpack');
+var install = require('gulp-install');
 
 var webpackConfig = require('./webpack.config.js');
 
 gulp.task('default', ['build', 'test']);
 
-gulp.task('build', function() {
+gulp.task('dependencies', function() {
+    return gulp.src(['./package.json'])
+        .pipe(install());
+})
+
+gulp.task('build', ['dependencies'], function() {
     return gulp.src('src/app.js')
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('target/'));
