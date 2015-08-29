@@ -5,7 +5,7 @@ export default class Todo extends Component {
     render() {
         const { onClick, text, completed } = this.props;
         return  (
-            <div onClick={onClick}>
+            <div style={{color: completed ? 'green' : 'red'}} onClick={onClick}>
                 {completed ? '\u2611 >> ' : '\u2612 >> '}
                 {text}
             </div>
