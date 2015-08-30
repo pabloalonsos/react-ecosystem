@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { is } from 'immutable';
 import { VisibilityFilters } from '../actions';
 
-export default class Footer extends Component {
+export default class Filter extends Component {
 
     renderFilter(filter, name) {
-        return filter !== this.props.filter ? (
+        return !is(this.props.visibilityFilter.get('filter'), filter) ? (
             <div style={{ color: 'red' }} onClick={this.props.onFilterChange.bind(null, filter)}>
                 { name }
             </div>
@@ -28,11 +29,13 @@ export default class Footer extends Component {
 
 };
 
-Footer.propTypes = {
-    onFilterChange: PropTypes.func.isRequired,
-    filter: PropTypes.oneOf([
-        VisibilityFilters.SHOW_ALL,
-        VisibilityFilters.SHOW_COMPLETED,
-        VisibilityFilters.SHOW_ACTIVE
-    ]).isRequired
-};
+//Filter.propTypes = {
+//    onFilterChange: PropTypes.func.isRequired,
+//    visibilityFilter: PropTypes.shape({
+//        filter: PropTypes.oneOf([
+//            VisibilityFilters.SHOW_ALL,
+//            VisibilityFilters.SHOW_COMPLETED,
+//            VisibilityFilters.SHOW_ACTIVE
+//        ]).isRequired
+//    }).isRequired
+//};
