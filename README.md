@@ -9,7 +9,8 @@
   * [x] React-hot-loader
   * [x] React-devtools
   * [ ] React-router
-  * [ ] Testing Framework
+  * [x] ImmutableJS
+  * [ ] Testing Framework (Mocha-JSDOM)
   * [ ] Improved Gulp
 
 #### Architecture (?)

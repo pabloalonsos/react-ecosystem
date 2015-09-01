@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import * as AllActions from '../actions';
 
@@ -11,6 +12,7 @@ import TodoList from '../components/todo_list';
 class Main extends Component {
 
     render() {
+
         const { actions, todos, visibilityFilter } = this.props;
 
         return (
@@ -26,19 +28,14 @@ class Main extends Component {
 
 }
 
-//Main.propTypes = {
-//    visibleTodos: PropTypes.arrayOf(PropTypes.shape({
-//        text: PropTypes.string.isRequired,
-//        completed: PropTypes.bool.isRequired
-//    })),
-//    visibilityFilter: PropTypes.shape({
-//        filter: PropTypes.oneOf([
-//            AllActions.VisibilityFilters.SHOW_ALL,
-//            AllActions.VisibilityFilters.SHOW_COMPLETED,
-//            AllActions.VisibilityFilters.SHOW_ACTIVE
-//        ]).isRequired
-//    }).isRequired
-//};
+Main.propTypes = {
+    todos: ImmutablePropTypes.listOf(
+        ImmutablePropTypes.contains({
+            text: PropTypes.string.isRequired,
+            completed: PropTypes.bool.isRequired
+        }).isRequired
+    ).isRequired
+};
 
 function selectTodos(todos, visibilityFilter) {
     switch (visibilityFilter.get('filter')) {

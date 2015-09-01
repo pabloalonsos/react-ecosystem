@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { is } from 'immutable';
+import ImmutableproPropTypes from 'react-immutable-proptypes';
 import { VisibilityFilters } from '../actions';
 
 export default class Filter extends Component {
@@ -29,13 +30,13 @@ export default class Filter extends Component {
 
 };
 
-//Filter.propTypes = {
-//    onFilterChange: PropTypes.func.isRequired,
-//    visibilityFilter: PropTypes.shape({
-//        filter: PropTypes.oneOf([
-//            VisibilityFilters.SHOW_ALL,
-//            VisibilityFilters.SHOW_COMPLETED,
-//            VisibilityFilters.SHOW_ACTIVE
-//        ]).isRequired
-//    }).isRequired
-//};
+Filter.propTypes = {
+    onFilterChange: PropTypes.func.isRequired,
+    visibilityFilter: ImmutableproPropTypes.contains({
+        filter: PropTypes.oneOf([
+            VisibilityFilters.SHOW_ALL,
+            VisibilityFilters.SHOW_COMPLETED,
+            VisibilityFilters.SHOW_ACTIVE
+        ]).isRequired
+    }).isRequired
+};
