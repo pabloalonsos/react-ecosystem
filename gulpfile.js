@@ -12,7 +12,7 @@ gulp.task('dependencies', function() {
 })
 
 gulp.task('build', ['dependencies'], function() {
-    return gulp.src('src/app.js')
+    return gulp.src('client/src/app.js')
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('target/'));
 });

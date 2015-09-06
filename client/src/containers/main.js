@@ -42,9 +42,9 @@ function selectTodos(todos, visibilityFilter) {
         case AllActions.VisibilityFilters.SHOW_ALL:
             return todos;
         case AllActions.VisibilityFilters.SHOW_COMPLETED:
-            return todos.filter(todo => todo.completed);
+            return todos.filter(todo => todo.get('completed'));
         case AllActions.VisibilityFilters.SHOW_ACTIVE:
-            return todos.filter(todo => !todo.completed);
+            return todos.filter(todo => !todo.get('completed'));
     }
 }
 
