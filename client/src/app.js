@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { devTools, persistState } from 'redux-devtools';
@@ -15,15 +16,23 @@ const devCreateStore = compose(
 
 let store = devCreateStore(reducers);
 
-React.render(
-    <div>
-        <Provider store={store}>
-            {() => <Main />}
-        </Provider>
-        <DebugPanel top right bottom>
-            <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
-    </div>,
+class Root extends Component {
+    render() {
+        return (
+            <div>
+                <Provider store={store}>
+                    <Main />
+                </Provider>
+                <DebugPanel top right bottom>
+                    <DevTools store={store} monitor={LogMonitor} />
+                </DebugPanel>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    React.createElement(Root),
     document.getElementById('root')
 )
 
