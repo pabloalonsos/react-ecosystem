@@ -4,7 +4,7 @@ import {
     COMPLETE_TODO,
 } from '../actions';
 
-export default function todos(state = List(), action) {
+export default function todos(state = new List(), action) {
     switch (action.type) {
         case ADD_TODO:
             return state.push(fromJS({

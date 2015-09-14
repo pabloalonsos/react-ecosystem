@@ -9,34 +9,6 @@ import Filter from '../components/filter';
 import AddTodo from '../components/add_todo';
 import TodoList from '../components/todo_list';
 
-class Main extends Component {
-
-    render() {
-
-        const { actions, todos, visibilityFilter } = this.props;
-
-        return (
-            <div>
-                <AddTodo onAddTodo={ text => actions.addTodo(text) } />
-                <Filter
-                    visibilityFilter={ visibilityFilter }
-                    onFilterChange={ nextFilter => actions.setVisibilityFilter(nextFilter) } />
-                <TodoList todos={ selectTodos(todos, visibilityFilter) } onTodoClick={ index => actions.completeTodo(index) }/>
-            </div>
-        )
-    }
-
-}
-
-Main.propTypes = {
-    todos: ImmutablePropTypes.listOf(
-        ImmutablePropTypes.contains({
-            text: PropTypes.string.isRequired,
-            completed: PropTypes.bool.isRequired
-        }).isRequired
-    ).isRequired
-};
-
 function selectTodos(todos, visibilityFilter) {
     switch (visibilityFilter.get('filter')) {
         case AllActions.VisibilityFilters.SHOW_ALL:
@@ -45,10 +17,42 @@ function selectTodos(todos, visibilityFilter) {
             return todos.filter(todo => todo.get('completed'));
         case AllActions.VisibilityFilters.SHOW_ACTIVE:
             return todos.filter(todo => !todo.get('completed'));
+        default:
+            return todos;
     }
 }
 
+class Main extends Component {
+
+    render() {
+        const { actions, todos, visibilityFilter } = this.props;
+
+        return (
+            <div>
+                <AddTodo onAddTodo={text => actions.addTodo(text)} />
+                <Filter
+                    visibilityFilter={visibilityFilter}
+                    onFilterChange={nextFilter => actions.setVisibilityFilter(nextFilter)} />
+                <TodoList todos={selectTodos(todos, visibilityFilter)} onTodoClick={index => actions.completeTodo(index)}/>
+            </div>
+        );
+    }
+
+}
+
+Main.propTypes = {
+    actions: PropTypes.object,
+    todos: ImmutablePropTypes.listOf(
+        ImmutablePropTypes.contains({
+            text: PropTypes.string.isRequired,
+            completed: PropTypes.bool.isRequired
+        }).isRequired
+    ).isRequired,
+    visibilityFilter: PropTypes.object
+
+};
+
 export default connect(
-    state => ({...state}),
-    dispatch => ({ actions: bindActionCreators(AllActions, dispatch)})
+    state => ({ ...state }),
+    dispatch => ({ actions: bindActionCreators(AllActions, dispatch) })
 )(Main);

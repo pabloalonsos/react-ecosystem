@@ -14,11 +14,14 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
+    eslint: {
+        configFile: path.join(__dirname, '.eslintrc')
+    },
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel'],
+                loaders: ['react-hot', 'babel', 'eslint-loader'],
                 exclude: /node_modules/
             }
         ]

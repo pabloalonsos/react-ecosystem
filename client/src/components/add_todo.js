@@ -2,7 +2,7 @@ import React, { Component, PropTypes, findDOMNode } from 'react';
 
 export default class AddTodo extends Component {
 
-    handleClick(event) {
+    handleClick() {
         const node = findDOMNode(this.refs.input);
         const text = node.value.trim();
         if (text !== '') {
@@ -14,12 +14,12 @@ export default class AddTodo extends Component {
     render() {
         return (
             <div>
-                <input type='text' ref='input' />
-                <button onClick={ event => this.handleClick(event)}>
+                <input type="text" ref="input" />
+                <button onClick={event => this.handleClick(event)}>
                     Add
                 </button>
             </div>
-        )
+        );
     }
 
 }

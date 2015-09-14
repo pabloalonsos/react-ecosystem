@@ -9,8 +9,8 @@ export default class Todo extends Component {
         const text = todo.get('text');
         const completed = todo.get('completed');
 
-        return  (
-            <div style={{color: completed ? 'green' : 'red'}} onClick={onClick}>
+        return (
+            <div style={{ color: completed ? 'green' : 'red' }} onClick={onClick}>
                 {completed ? '\u2611 >> ' : '\u2612 >> '}
                 {text}
             </div>
