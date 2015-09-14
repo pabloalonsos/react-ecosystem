@@ -8,8 +8,10 @@
   * [x] Gulp (basic)
   * [x] React-hot-loader
   * [x] React-devtools
-  * [ ] React-router
+  * [x] React-router
+  * [x] Redux-React-router
   * [x] ImmutableJS
+  * [x] ESLint
   * [ ] Testing Framework (Mocha-JSDOM)
   * [ ] Improved Gulp
 
@@ -19,4 +21,6 @@
 
 #### Notes
 
-  - Ctrl+H to toggle the LogMonitor
+  - `npm i` + `gulp` to build
+  - `npm start` to start the hot-loader server at `0.0.0.0:4444`
+  - `Ctrl+H` to toggle the LogMonitor
