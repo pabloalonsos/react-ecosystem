@@ -3,7 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import * as AllActions from '../actions';
+
+import Constants from '../constants';
+import * as todoActions from '../actions';
 
 import Filter from '../components/filter';
 import AddTodo from '../components/add_todo';
@@ -11,11 +13,11 @@ import TodoList from '../components/todo_list';
 
 function selectTodos(todos, visibilityFilter) {
     switch (visibilityFilter.get('filter')) {
-        case AllActions.VisibilityFilters.SHOW_ALL:
+        case Constants.VISIBILITY_FILTERS.SHOW_ALL:
             return todos;
-        case AllActions.VisibilityFilters.SHOW_COMPLETED:
+        case Constants.VISIBILITY_FILTERS.SHOW_COMPLETED:
             return todos.filter(todo => todo.get('completed'));
-        case AllActions.VisibilityFilters.SHOW_ACTIVE:
+        case Constants.VISIBILITY_FILTERS.SHOW_ACTIVE:
             return todos.filter(todo => !todo.get('completed'));
         default:
             return todos;
@@ -54,5 +56,5 @@ Main.propTypes = {
 
 export default connect(
     state => ({ ...state }),
-    dispatch => ({ actions: bindActionCreators(AllActions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(todoActions, dispatch) })
 )(Main);

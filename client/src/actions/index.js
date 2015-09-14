@@ -1,41 +1,22 @@
-
-/*
- * Action Types
- */
-
-export const ADD_TODO = 'ADD_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
-
-// Other Constants
-
-export const VisibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE'
-};
-
-/*
- * Action Creators
- */
+import Constants from '../constants';
 
 export function addTodo(text) {
     return {
-        type: ADD_TODO,
+        type: Constants.ADD_TODO,
         text
     };
 }
 
 export function completeTodo(index) {
     return {
-        type: COMPLETE_TODO,
+        type: Constants.COMPLETE_TODO,
         index
     };
 }
 
 export function setVisibilityFilter(filter) {
     return {
-        type: SET_VISIBILITY_FILTER,
+        type: Constants.SET_VISIBILITY_FILTER,
         filter
     };
 }

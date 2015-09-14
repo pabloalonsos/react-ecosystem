@@ -1,0 +1,12 @@
+const Constants = {
+    VISIBILITY_FILTERS: {
+        SHOW_ALL: 'SHOW_ALL',
+        SHOW_COMPLETED: 'SHOW_COMPLETED',
+        SHOW_ACTIVE: 'SHOW_ACTIVE'
+    },
+    ADD_TODO: 'ADD_TODO',
+    COMPLETE_TODO: 'COMPLETE_TODO',
+    SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER'
+};
+
+export default Constants;
