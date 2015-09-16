@@ -1,10 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute, Redirect } from 'react-router';
 
-import Main from './containers/main';
+import { Main, Dashboard, Settings } from './containers';
 
 const routes = (
-    <Route path="/" component={Main} />
+    <Route path="/" component={Main}>
+        <IndexRoute component={Dashboard} />
+        <Route path="settings" component={Settings} />
+        <Redirect from="*" to="/" />
+    </Route>
 );
 
 export default routes;

@@ -128,8 +128,8 @@
         "lines-around-comment": [2, {
             "beforeBlockComment": true,
             "afterBlockComment": true,
-            "beforeLineComment": true,
-            "afterLineComment": true,
+            "beforeLineComment": false,
+            "afterLineComment": false,
             "allowBlockStart": true,
             "allowBlockEnd": false
         }],
@@ -210,7 +210,7 @@
         "react/no-multi-comp": 2,
         "react/no-set-state": 0,
         "react/no-unknown-property": 2,
-        "react/prop-types": 2,
+        "react/prop-types": 1,
         "react/react-in-jsx-scope": 2,
         "react/require-extension": 0,
         "react/self-closing-comp": 2,
