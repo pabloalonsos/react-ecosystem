@@ -7,6 +7,7 @@ import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { createHistory } from 'history';
 
+import '../assets/style.scss';
 import routes from './routes';
 import reducers from './reducers';
 

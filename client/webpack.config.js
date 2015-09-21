@@ -5,7 +5,7 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://0.0.0.0:4444', // WebpackDevServer host and port
         'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-        './client/src/app.js'
+        './src/js/app.js'
     ],
     output: {
         path: path.join(__dirname, 'target'),
@@ -15,7 +15,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     eslint: {
-        configFile: path.join(__dirname, '.eslintrc')
+        configFile: path.join(__dirname, '../.eslintrc')
     },
     module: {
         loaders: [
@@ -23,6 +23,10 @@ module.exports = {
                 test: /\.js$/,
                 loaders: ['react-hot', 'babel', 'eslint-loader'],
                 exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
             }
         ]
     },
