@@ -1,17 +1,59 @@
 var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var express = require('express');
+var path = require('path');
+var devConfig = require('./webpack.config');
+var testConfig = require('./webpack.test.config');
 
-new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
-    hot: true,
-    historyApiFallback: true,
+var devApp = express();
+var testApp = express();
+
+var devCompiler = webpack(devConfig);
+var testCompiler = webpack(testConfig);
+
+/*
+ * Dev Server
+ */
+devApp.use(require('webpack-dev-middleware')(devCompiler, {
+    noInfo: true,
     stats: {
         colors: true
     }
-}).listen(4444, 'localhost', function (err, result) {
+}));
+
+devApp.use(require('webpack-hot-middleware')(devCompiler));
+
+devApp.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+devApp.listen(4444, 'localhost', function(err) {
     if (err) {
         console.log(err);
+        return;
     }
-    console.log('Listening on port 4444');
+    console.log('Dev Server listening on port 4444');
+});
+
+/*
+ * Test Server
+ */
+testApp.use(require('webpack-dev-middleware')(testCompiler, {
+    noInfo: true,
+    stats: {
+        colors: true
+    }
+}));
+
+testApp.use(require('webpack-hot-middleware')(testCompiler));
+
+testApp.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+testApp.listen(5555, 'localhost', function(err) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log('Test Server listening on port 5555');
 });

@@ -1,10 +1,10 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://0.0.0.0:4444', // WebpackDevServer host and port
-        'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+        'webpack-hot-middleware/client?http://0.0.0.0:4444',
         './src/js/app.js'
     ],
     output: {
@@ -12,7 +12,8 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ],
     eslint: {
         configFile: path.join(__dirname, '../.eslintrc')
@@ -21,14 +22,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel', 'eslint-loader'],
+                loaders: ['react-hot', 'babel', 'eslint'],
                 exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
-            }
+            },
         ]
     },
-    devtool: 'source-map'
+    devtool: 'eval'
 };

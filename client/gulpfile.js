@@ -5,6 +5,13 @@ var clean = require('gulp-clean');
 
 var webpackDevConfig = require('./webpack.config.js');
 var webpackProdConfig = require('./webpack.production.config.js');
+var webpackTestConfig = require('./webpack.test.config.js');
+
+/*
+ * TODO:
+ *  - Merge webpackDev with webpackTest ?
+ *  - Set up testing
+ */
 
 gulp.task('default', ['build-dev', 'test']);
 gulp.task('prod', ['build-prod', 'copy']);
@@ -42,5 +49,13 @@ gulp.task('copy', ['clean-prod'], function() {
 })
 
 gulp.task('test', ['build-dev'], function() {
-    return;
+    return gulp.src('src/tests')
+        .pipe(webpack(webpackTestConfig))
+        .pipe(gulp.dest('target/'));
+});
+
+gulp.task('testOnly', function() {
+    return gulp.src('src/tests')
+        .pipe(webpack(webpackTestConfig))
+        .pipe(gulp.dest('target/'));
 });
