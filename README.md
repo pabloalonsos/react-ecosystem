@@ -12,6 +12,7 @@
   * [x] Redux-React-router
   * [x] ImmutableJS
   * [x] ESLint
+  * [x] SASS
   * [ ] Testing Framework (Mocha-JSDOM)
   * [ ] Improved Gulp
 
