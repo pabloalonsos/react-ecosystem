@@ -15,9 +15,7 @@ var testCompiler = webpack(testConfig);
  */
 devApp.use(require('webpack-dev-middleware')(devCompiler, {
     noInfo: true,
-    stats: {
-        colors: true
-    }
+    stats: { colors: true }
 }));
 
 devApp.use(require('webpack-hot-middleware')(devCompiler));
@@ -39,16 +37,11 @@ devApp.listen(4444, 'localhost', function(err) {
  */
 testApp.use(require('webpack-dev-middleware')(testCompiler, {
     noInfo: true,
-    stats: {
-        colors: true
-    }
+    publicPath: '/test/',
+    stats: { colors: true }
 }));
 
 testApp.use(require('webpack-hot-middleware')(testCompiler));
-
-testApp.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
 testApp.listen(5555, 'localhost', function(err) {
     if (err) {

@@ -1,6 +1,13 @@
 node_modules
 
 target
+dist
+client/target
+client/dist
+client/coverage
+client/tests
 
 *.swp
 npm-debug.log
+
+.coverrun

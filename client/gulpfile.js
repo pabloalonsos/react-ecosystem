@@ -2,6 +2,11 @@ var gulp = require('gulp');
 var webpack = require('gulp-webpack');
 var install = require('gulp-install');
 var clean = require('gulp-clean');
+var runSequence = require('run-sequence');
+var babel = require('gulp-babel');
+var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
+var isparta = require('isparta');
 
 var webpackDevConfig = require('./webpack.config.js');
 var webpackProdConfig = require('./webpack.production.config.js');
@@ -9,12 +14,11 @@ var webpackTestConfig = require('./webpack.test.config.js');
 
 /*
  * TODO:
- *  - Merge webpackDev with webpackTest ?
- *  - Set up testing
+ *  - Merge webpack files
  */
 
 gulp.task('default', ['build-dev', 'test']);
-gulp.task('prod', ['build-prod', 'copy']);
+gulp.task('prod', ['build-prod', 'copy', 'test']);
 
 gulp.task('dependencies', function() {
     return gulp.src(['./package.json'])
@@ -22,40 +26,56 @@ gulp.task('dependencies', function() {
 });
 
 gulp.task('clean-dev', function() {
-    return gulp.src(['target/'], { read: false })
+    return gulp.src(['target'], { read: false })
         .pipe(clean());
 });
 
 gulp.task('build-dev', ['clean-dev', 'dependencies'], function() {
     return gulp.src('src/js/app.js')
         .pipe(webpack(webpackDevConfig))
-        .pipe(gulp.dest('target/'));
+        .pipe(gulp.dest('target'));
 });
 
 gulp.task('clean-prod', function() {
-    return gulp.src(['dist/'], { read: false })
+    return gulp.src(['dist'], { read: false })
         .pipe(clean());
 });
 
 gulp.task('build-prod', ['clean-prod', 'dependencies'], function() {
     return gulp.src('src/js/app.js')
         .pipe(webpack(webpackProdConfig))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy', ['clean-prod'], function() {
     return gulp.src('index.html')
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist'));
 })
 
-gulp.task('test', ['build-dev'], function() {
+gulp.task('compile-test', function() {
     return gulp.src('src/tests')
         .pipe(webpack(webpackTestConfig))
-        .pipe(gulp.dest('target/'));
+        .pipe(gulp.dest('tests'));
 });
 
-gulp.task('testOnly', function() {
-    return gulp.src('src/tests')
-        .pipe(webpack(webpackTestConfig))
-        .pipe(gulp.dest('target/'));
+gulp.task('test', ['compile-test'], function() {
+    return gulp.src('tests/test.js')
+        .pipe(mocha());
+});
+
+gulp.task('coverage:instrument', function() {
+    return gulp.src('src/js/**/*.js')
+        .pipe(babel())
+        .pipe(istanbul({ instrumenter: isparta.Instrumenter}))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('coverage:report', function(done) {
+    return gulp.src('src/js/**/*.js')
+        .pipe(babel())
+        .pipe(istanbul.writeReports());
+});
+
+gulp.task('coverage', function(done) {
+    runSequence('coverage:instrument', 'test', 'coverage:report', done);
 });

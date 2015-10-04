@@ -27,9 +27,20 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+                loaders: ['style', 'css?sourceMap', 'sass?sourceMap'],
+                exclude: /node_modules/
             },
         ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.json'],
+        alias: {
+            actions: path.join(__dirname, 'src/js/actions'),
+            components: path.join(__dirname, 'src/js/components'),
+            constants: path.join(__dirname, 'src/js/constants'),
+            containers: path.join(__dirname, 'src/js/containers'),
+            reducers: path.join(__dirname, 'src/js/reducers')
+        }
     },
     devtool: 'eval'
 };
