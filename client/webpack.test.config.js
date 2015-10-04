@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports = {
     entry: [
-        // 'mocha!./src/tests'
         './src/tests'
     ],
     output: {
@@ -18,10 +17,15 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.js?$/,
+                loader: 'babel-istanbul-instrumenter',
+                exclude: /node_modules|tests/
+            },
+            {
                 test: /\.json?$/,
                 loader: 'json',
                 exclude: /node_modules/
-            }
+            },
         ]
     },
     resolveLoader: {

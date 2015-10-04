@@ -22,7 +22,40 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel', 'eslint'],
+                loader: 'react-hot',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.js$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+                query: {
+                    stage: 0,
+                    env: {
+                        development: {
+                            plugins: [ 'react-transform' ],
+                            extra: {
+                                'react-transform': {
+                                    transforms: [
+                                        {
+                                            transform: 'react-transform-hmr',
+                                            imports: [ 'react' ],
+                                            locals: [ 'module' ]
+                                        },
+                                        {
+                                            transform: 'react-transform-catch-errors',
+                                            imports: [ 'react', 'redbox-react' ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                test: /\.js$/,
+                loader: 'eslint',
                 exclude: /node_modules/
             },
             {
