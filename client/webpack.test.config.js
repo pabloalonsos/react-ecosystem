@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -8,7 +9,6 @@ module.exports = {
         path: path.join(__dirname, 'tests'),
         filename: 'test.js'
     },
-    target: 'node',
     module: {
         loaders: [
             {
@@ -28,9 +28,6 @@ module.exports = {
             },
         ]
     },
-    resolveLoader: {
-        root: path.join(__dirname, 'node_modules')
-    },
     resolve: {
         extensions: ['', '.js', '.json'],
         alias: {
@@ -40,7 +37,7 @@ module.exports = {
             containers: path.join(__dirname, 'src/js/containers'),
             reducers: path.join(__dirname, 'src/js/reducers')
         }
-    },
+    }
 };
 // webpack --config webpack.test.config.js --target=node
 // node_modules/.bin/mocha test/test.js

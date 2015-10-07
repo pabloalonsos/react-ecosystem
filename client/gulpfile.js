@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var webpack = require('gulp-webpack');
 var install = require('gulp-install');
 var clean = require('gulp-clean');
-var runSequence = require('run-sequence');
 var mocha = require('gulp-mocha');
 var istanbul = require('gulp-istanbul');
 
@@ -50,7 +49,7 @@ gulp.task('copy', ['clean-prod'], function() {
         .pipe(gulp.dest('dist'));
 })
 
-gulp.task('compile-test', function(done) {
+gulp.task('compile-test', function() {
     return gulp.src('src/tests')
         .pipe(webpack(webpackTestConfig))
         .pipe(gulp.dest('tests'));

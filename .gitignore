@@ -8,6 +8,7 @@ client/coverage
 client/tests
 
 *.swp
+*.swo
 npm-debug.log
 
 .coverrun
