@@ -13,12 +13,16 @@
   * [x] ImmutableJS
   * [x] ESLint
   * [x] SASS
-  * [ ] Testing Framework (Mocha-JSDOM)
-  * [ ] Improved Gulp
+  * [x] Testing Framework (Mocha-JSDOM)
 
 #### Architecture (?)
 
   * GraphQL/Relay
+  * Falcor
+
+#### Other
+
+  * Flow
 
 #### Notes
 
