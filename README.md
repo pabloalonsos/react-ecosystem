@@ -14,6 +14,7 @@
   * [x] ESLint
   * [x] SASS
   * [x] Testing Framework (Mocha-JSDOM)
+  * [x] Coverage Reports (Istanbul)
 
 #### Architecture (?)
 
