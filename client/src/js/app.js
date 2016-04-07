@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { combineReducers, createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { reduxReactRouter, ReduxRouter, routerStateReducer } from 'redux-react-router';
-import { devTools, persistState } from 'redux-devtools';
+import { devTools } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { createHistory } from 'history';
 
@@ -34,7 +34,6 @@ const store = devCreateStore(combinedReducers);
 
 class Root extends React.Component {
     render() {
-        debugger;
         return (
             <div>
                 <Provider store={store}>

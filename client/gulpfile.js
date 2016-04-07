@@ -49,7 +49,12 @@ gulp.task('copy', ['clean-prod'], function() {
         .pipe(gulp.dest('dist'));
 })
 
-gulp.task('compile-test', function() {
+gulp.task('clean-test', function() {
+    return gulp.src(['tests'], { read: false })
+        .pipe(clean());
+});
+
+gulp.task('compile-test', ['clean-test'], function() {
     return gulp.src('src/tests')
         .pipe(webpack(webpackTestConfig))
         .pipe(gulp.dest('tests'));
