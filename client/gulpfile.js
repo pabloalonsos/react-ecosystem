@@ -66,7 +66,7 @@ gulp.task('coverage', ['compile-test'], function(done) {
         .pipe(istanbul.writeReports({
             coverageVariable: '__coverage__',
             dir: './coverage',
-            reporters: ['lcov', 'json', 'text', 'text-summary']
+            reporters: ['lcov', 'html', 'json', 'text', 'text-summary']
         }));
 });
 

@@ -4,17 +4,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: [
-        'webpack-hot-middleware/client?http://0.0.0.0:4444',
         './src/js/app.js'
     ],
     output: {
         path: path.join(__dirname, 'target'),
         filename: 'bundle.js'
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ],
     eslint: {
         configFile: path.join(__dirname, '../.eslintrc')
     },
@@ -22,35 +17,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'react-hot',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.js$/,
                 loader: 'babel',
                 exclude: /node_modules/,
                 query: {
-                    stage: 0,
-                    env: {
-                        development: {
-                            plugins: [ 'react-transform' ],
-                            extra: {
-                                'react-transform': {
-                                    transforms: [
-                                        {
-                                            transform: 'react-transform-hmr',
-                                            imports: [ 'react' ],
-                                            locals: [ 'module' ]
-                                        },
-                                        {
-                                            transform: 'react-transform-catch-errors',
-                                            imports: [ 'react', 'redbox-react' ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
+                    presets: ['es2015', 'stage-0'],
+                    plugins: [
+                        "transform-react-jsx",
+                        "transform-react-display-name"
+                    ]
                 }
             },
             {

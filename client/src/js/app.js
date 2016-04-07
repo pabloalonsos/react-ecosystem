@@ -7,6 +7,10 @@ import { devTools, persistState } from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import { createHistory } from 'history';
 
+import { Route, IndexRoute, Redirect } from 'react-router';
+import { Main, Dashboard, Settings } from './containers';
+
+
 import '../assets/style.scss';
 import routes from './routes';
 import reducers from './reducers';
@@ -21,24 +25,36 @@ const devCreateStore = compose(
         routes,
         createHistory
     }),
-    devTools(),
-    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    devTools()
+    // persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
 )(createStore);
+
 
 const store = devCreateStore(combinedReducers);
 
-ReactDOM.render(
-    <div>
-        <Provider store={store}>
-            <ReduxRouter />
-        </Provider>
-        <DebugPanel
-            top={true}
-            right={true}
-            bottom={true}>
-            <DevTools store={store} monitor={LogMonitor} />
-        </DebugPanel>
-    </div>,
-    document.getElementById('root')
-);
+class Root extends React.Component {
+    render() {
+        debugger;
+        return (
+            <div>
+                <Provider store={store}>
+                    <ReduxRouter>
+                        <Route path="/" component={Main}>
+                            <IndexRoute component={Dashboard} />
+                            <Route path="settings" component={Settings} />
+                            <Redirect from="*" to="/" />
+                        </Route>
+                    </ReduxRouter>
+                </Provider>
+                <DebugPanel
+                    top={true}
+                    right={true}
+                    bottom={true}>
+                    <DevTools store={store} monitor={LogMonitor} />
+                </DebugPanel>
+            </div>
+        );
+    }
+}
 
+ReactDOM.render(<Root />, document.getElementById('root'));
