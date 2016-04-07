@@ -18,6 +18,7 @@
     "reselect": "0.0.2"
   },
   "devDependencies": {
+    "@kadira/storybook": "^1.5.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.2",
@@ -58,13 +59,15 @@
     "redbox-react": "^1.1.0",
     "redux-devtools": "2.1.5",
     "sass-loader": "^2.0.1",
+    "stack-source-map": "^1.0.4",
     "style-loader": "^0.12.4",
     "webpack": "1.12.0",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0"
   },
   "scripts": {
-    "start": "node dev_server.js"
+    "start": "node dev_server.js",
+    "storybook": "start-storybook -p 9001"
   },
   "keywords": [
     "React",
