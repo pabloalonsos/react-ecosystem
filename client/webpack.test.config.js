@@ -12,14 +12,16 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js?$/,
+                test: /\.js$/,
                 loader: 'babel',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.js?$/,
-                loader: 'babel-istanbul-instrumenter',
-                exclude: /node_modules|tests/
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'stage-0'],
+                    plugins: [
+                        "transform-react-jsx",
+                        "transform-react-display-name"
+                    ]
+                }
             },
             {
                 test: /\.json?$/,

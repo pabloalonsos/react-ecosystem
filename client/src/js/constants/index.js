@@ -9,4 +9,4 @@ const Constants = {
     SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER'
 };
 
-export default Constants;
+module.exports = Constants;

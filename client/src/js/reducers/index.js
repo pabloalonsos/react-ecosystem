@@ -6,4 +6,4 @@ const Reducers = {
     todos
 };
 
-export default Reducers;
+module.exports = Reducers;

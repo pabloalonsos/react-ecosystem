@@ -21,7 +21,7 @@ function selectTodos(todos, visibilityFilter) {
     }
 }
 
-class Main extends Component {
+class Dashboard extends Component {
 
     render() {
         const { actions, todos, visibilityFilter } = this.props;
@@ -40,7 +40,7 @@ class Main extends Component {
 
 }
 
-Main.propTypes = {
+Dashboard.propTypes = {
     actions: PropTypes.object,
     todos: ImmutablePropTypes.listOf(
         ImmutablePropTypes.contains({
@@ -54,4 +54,4 @@ Main.propTypes = {
 export default connect(
     state => ({ ...state }),
     dispatch => ({ actions: bindActionCreators(todoActions, dispatch) })
-)(Main);
+)(Dashboard);
